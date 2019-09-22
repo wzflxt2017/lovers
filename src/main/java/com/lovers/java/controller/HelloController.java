@@ -12,11 +12,20 @@ public class HelloController {
         return "index";
     }
 
+    @GetMapping("login")
+    public String login(Model model){
+
+        return "hello";
+    }
+
+
     @GetMapping("hello")
     public String hello(Model model){
         String name="wangzefeng";
         model.addAttribute("name",name);
         return "hello";
     }
+
+
 
 }
