@@ -12,10 +12,10 @@ github:
 spring:
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource
-    url: jdbc:mysql://localhost:3306/lovers?serverTimezone=Shanghai
+    url: jdbc:mysql://localhost:3306/lovers?serverTimezone=Asia/Shanghai
     username: root
     password: root
-    driver-class-name: com.mysql.jdbc.Driver
+    driver-class-name: com.mysql.cj.jdbc.Driver
     druid:
       initial-size: 10
       min-idle: 1
@@ -33,6 +33,10 @@ spring:
       filters: stat
       connection-properties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
       use-global-data-source-stat: true
+  mvc:
+    view:
+      suffix: .html
+
 mybatis:
-  mapper-locations: classpath:com/lovers/**/*.xml
-  type-aliases-package: com.lovers.*.dao
+  mapper-locations: classpath:/com/lovers/java/mapper/*.xml
+  type-aliases-package: com.lovers.java.domain

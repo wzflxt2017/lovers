@@ -1,7 +1,6 @@
 package com.lovers.java.controller;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
@@ -11,21 +10,6 @@ public class HelloController {
     public String index(){
         return "index";
     }
-
-    @GetMapping("login")
-    public String login(Model model){
-
-        return "hello";
-    }
-
-
-    @GetMapping("hello")
-    public String hello(Model model){
-        String name="wangzefeng";
-        model.addAttribute("name",name);
-        return "hello";
-    }
-
 
 
 }
