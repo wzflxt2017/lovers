@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+
+    <context id="mysqlTables" targetRuntime="MyBatis3">
+        <jdbcConnection driverClass="com.mysql.cj.jdbc.Driver"
+                        connectionURL="jdbc:mysql://localhost:3306/lovers?serverTimezone=Asia/Shanghai"
+                        userId="root"
+                        password="root">
+        </jdbcConnection>
+
+        <javaTypeResolver >
+            <property name="forceBigDecimals" value="true" />
+        </javaTypeResolver>
+
+        <javaModelGenerator targetPackage="com.lovers.java.domain" targetProject="src/main/java">
+            <property name="enableSubPackages" value="true" />
+            <!--<property name="rootClass" value="com.lovers.java.domain.BaseDomain"/>-->
+            <property name="trimStrings" value="true" />
+        </javaModelGenerator>
+
+        <sqlMapGenerator targetPackage="com.lovers.java.mapper"  targetProject="src/main/resources">
+            <property name="enableSubPackages" value="true" />
+        </sqlMapGenerator>
+
+        <javaClientGenerator type="XMLMAPPER" targetPackage="com.lovers.java.mapper"  targetProject="src/main/java">
+            <property name="enableSubPackages" value="true" />
+        </javaClientGenerator>
+
+        <table schema="lovers" tableName="sys_user" domainObjectName="SysUser" >
+            <property name="useActualColumnNames" value="false"/>
+            <generatedKey column="user_id" sqlStatement="mysql" />
+        </table>
+
+        <table schema="lovers" tableName="sys_file" domainObjectName="SysFile" >
+            <property name="useActualColumnNames" value="false"/>
+            <generatedKey column="file_id" sqlStatement="mysql" />
+        </table>
+
+        <table schema="lovers" tableName="lovers_action_workflow" domainObjectName="LoversActionWorkflow" >
+            <property name="useActualColumnNames" value="false"/>
+            <generatedKey column="action_id" sqlStatement="mysql" />
+        </table>
+
+        <table schema="lovers" tableName="lovers_incident" domainObjectName="LoversIncident" >
+            <property name="useActualColumnNames" value="false"/>
+            <generatedKey column="incident_id" sqlStatement="mysql" />
+        </table>
+
+        <table schema="lovers" tableName="lovers_space" domainObjectName="LoversSpace" >
+            <property name="useActualColumnNames" value="false"/>
+            <generatedKey column="space_id" sqlStatement="mysql" />
+        </table>
+
+        <table schema="lovers" tableName="user_friend" domainObjectName="UserFriend" >
+            <property name="useActualColumnNames" value="false"/>
+            <generatedKey column="user_friend_id" sqlStatement="mysql" />
+        </table>
+
+        <table schema="lovers" tableName="user_message" domainObjectName="UserMessage" >
+            <property name="useActualColumnNames" value="false"/>
+            <generatedKey column="message_id" sqlStatement="mysql" />
+        </table>
+
+        <table schema="lovers" tableName="user_mood_record" domainObjectName="UserMoodRecord" >
+            <property name="useActualColumnNames" value="false"/>
+            <generatedKey column="record_id" sqlStatement="mysql" />
+        </table>
+
+        <table schema="lovers" tableName="user_mood_comment" domainObjectName="UserMoodComment" >
+            <property name="useActualColumnNames" value="false"/>
+            <generatedKey column="comment_id" sqlStatement="mysql" />
+        </table>
+
+        <table schema="lovers" tableName="user_photo_album" domainObjectName="UserPhotoAlbum" >
+            <property name="useActualColumnNames" value="false"/>
+            <generatedKey column="album_id" sqlStatement="mysql" />
+        </table>
+
+        <table schema="lovers" tableName="user_photo" domainObjectName="UserPhoto" >
+            <property name="useActualColumnNames" value="false"/>
+            <generatedKey column="photo_id" sqlStatement="mysql" />
+        </table>
+
+        <table schema="lovers" tableName="workflow" domainObjectName="Workflow" >
+            <property name="useActualColumnNames" value="false"/>
+            <generatedKey column="workflow_id" sqlStatement="mysql" />
+        </table>
+
+        <table schema="lovers" tableName="workflow_node" domainObjectName="WorkflowNode" >
+            <property name="useActualColumnNames" value="false"/>
+            <generatedKey column="node_id" sqlStatement="mysql" />
+        </table>
+
+        <table schema="lovers" tableName="workflow_link" domainObjectName="WorkflowLink" >
+            <property name="useActualColumnNames" value="false"/>
+            <generatedKey column="link_id" sqlStatement="mysql" />
+        </table>
+
+        <table schema="lovers" tableName="workflow_business" domainObjectName="WorkflowBusiness" >
+            <property name="useActualColumnNames" value="false"/>
+            <generatedKey column="business_id" sqlStatement="mysql" />
+        </table>
+
+        <table schema="lovers" tableName="workflow_task" domainObjectName="WorkflowTask" >
+            <property name="useActualColumnNames" value="false"/>
+            <generatedKey column="task_id" sqlStatement="mysql" />
+        </table>
+
+    </context>
+</generatorConfiguration>
