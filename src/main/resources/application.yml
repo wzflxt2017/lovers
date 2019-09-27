@@ -40,3 +40,4 @@ spring:
 mybatis:
   mapper-locations: classpath:/com/lovers/java/mapper/*.xml
   type-aliases-package: com.lovers.java.domain
+

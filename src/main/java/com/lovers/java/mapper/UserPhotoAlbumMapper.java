@@ -2,8 +2,10 @@ package com.lovers.java.mapper;
 
 import com.lovers.java.domain.UserPhotoAlbum;
 import com.lovers.java.domain.UserPhotoAlbumExample;
-import java.util.List;
 import org.apache.ibatis.annotations.Param;
+
+
+import java.util.List;
 
 public interface UserPhotoAlbumMapper {
     /**

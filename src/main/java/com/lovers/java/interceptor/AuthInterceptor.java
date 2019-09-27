@@ -15,8 +15,8 @@ public class AuthInterceptor implements HandlerInterceptor {
         HttpSession session = request.getSession();
         Object attribute = session.getAttribute(CommonConstants.SESSION_USER);
         if(attribute!=null){
-            session.setAttribute(CommonConstants.SESSION_USER,attribute);
-            request.setAttribute(CommonConstants.IS_LOGIN,true);
+//            session.setAttribute(CommonConstants.SESSION_USER,attribute);
+            session.setAttribute(CommonConstants.IS_LOGIN,true);
         }else{
             session.setAttribute(CommonConstants.IS_LOGIN,false);
         }

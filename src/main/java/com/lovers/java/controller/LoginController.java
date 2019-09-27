@@ -1,7 +1,7 @@
 package com.lovers.java.controller;
 
 import com.lovers.java.constants.CommonConstants;
-import com.lovers.java.controller.common.CommonController;
+import com.lovers.base.controller.CommonController;
 import com.lovers.java.domain.SysUser;
 import com.lovers.java.service.LoginService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +10,6 @@ import org.springframework.util.DigestUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import javax.servlet.http.HttpServletRequest;
 import java.util.Calendar;
 
 @Controller

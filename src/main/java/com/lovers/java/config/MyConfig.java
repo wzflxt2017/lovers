@@ -18,11 +18,15 @@ public class MyConfig implements WebMvcConfigurer {
         List<String> excludeList=new ArrayList<>();
 
 
+        addList.add("/mood/**");
+        addList.add("/user/**");
+        addList.add("/space/**");
 
         excludeList.add("/");
         excludeList.add("/index");
         excludeList.add("/login/**");
 //        registry.addInterceptor(new LoginInterceptor()).addPathPatterns("/**").excludePathPatterns(excludeList);
         registry.addInterceptor(new AuthInterceptor()).addPathPatterns("/**");
+        registry.addInterceptor(new LoginInterceptor()).addPathPatterns(addList);
     }
 }
