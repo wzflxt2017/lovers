@@ -8,7 +8,7 @@ import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
-public interface SysUserMapper extends BaseMapper<SysUser,Integer> {
+public interface SysUserMapper{
 
 
 

@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
  * @Description:
  */
 @Service
-public class MoodServiceImpl implements MoodService {
+public class MoodServiceImpl  implements MoodService {
 
 
 }

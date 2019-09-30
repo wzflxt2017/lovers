@@ -8,7 +8,7 @@ import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
-public interface LoversActionWorkflowMapper extends BaseMapper<LoversActionWorkflow,Integer> {
+public interface LoversActionWorkflowMapper {
 
     long countByExample(LoversActionWorkflowExample example);
 

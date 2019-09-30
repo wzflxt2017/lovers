@@ -2,6 +2,7 @@ package com.lovers.base.controller;
 
 import com.lovers.java.constants.CommonConstants;
 import com.lovers.java.domain.SysUser;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.beans.propertyeditors.PropertiesEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.WebDataBinder;
@@ -15,6 +16,8 @@ import java.util.Date;
 @Controller
 public class CommonController extends BaseController {
 
+    @Value("${lovers.rootPath}")
+    protected String rootPath;
 
     public SysUser getSysUser(){
         Object ouser = session.getAttribute(CommonConstants.SESSION_USER);
@@ -91,5 +94,12 @@ public class CommonController extends BaseController {
         }
     }
 
+    public String getRootPath() {
+        return rootPath;
+    }
+
+    public void setRootPath(String rootPath) {
+        this.rootPath = rootPath;
+    }
 }
 

@@ -10,7 +10,6 @@ import org.springframework.stereotype.Service;
  * @Date: 2019-09-27 22:27
  * @Description:
  */
-@Service
 public class BaseServiceImpl<E,PK> implements BaseService<E,PK> {
 
     @Autowired
