@@ -1,10 +1,8 @@
 package com.lovers.java.mapper;
 
-import com.lovers.base.mapper.BaseMapper;
 import com.lovers.java.domain.SysUser;
 import com.lovers.java.domain.SysUserExample;
 import org.apache.ibatis.annotations.Param;
-
 
 import java.util.List;
 
@@ -28,6 +26,8 @@ public interface SysUserMapper{
     int insertSelective(SysUser record);
 
     List<SysUser> selectByExample(SysUserExample example);
+
+    List<SysUser> selectFriendByUserId(Integer userId);
 
 
     SysUser selectByPrimaryKey(Integer userId);

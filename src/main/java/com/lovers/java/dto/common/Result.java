@@ -9,13 +9,13 @@ public class Result {
 
     private String message;
 
-    private Map<String,String> data=new HashMap<>();
+    private Object data=new HashMap<>();
 
-    public Map<String, String> getData() {
+    public Object getData() {
         return data;
     }
 
-    public void setData(Map<String, String> data) {
+    public void setData(Object data) {
         this.data = data;
     }
 

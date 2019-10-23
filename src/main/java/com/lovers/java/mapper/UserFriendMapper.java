@@ -21,7 +21,6 @@ public interface UserFriendMapper{
 
     List<UserFriend> selectByExample(UserFriendExample example);
 
-
     UserFriend selectByPrimaryKey(Integer userFriendId);
 
     int updateByExampleSelective(@Param("record") UserFriend record, @Param("example") UserFriendExample example);
@@ -33,4 +32,6 @@ public interface UserFriendMapper{
     int updateByPrimaryKeySelective(UserFriend record);
 
     int updateByPrimaryKey(UserFriend record);
+
+
 }

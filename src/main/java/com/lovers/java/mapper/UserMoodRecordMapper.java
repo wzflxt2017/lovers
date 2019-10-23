@@ -1,5 +1,6 @@
 package com.lovers.java.mapper;
 
+import com.lovers.java.domain.SysUser;
 import com.lovers.java.domain.UserMoodRecord;
 import com.lovers.java.domain.UserMoodRecordExample;
 import java.util.List;
@@ -94,4 +95,7 @@ public interface UserMoodRecordMapper {
      * @mbg.generated Wed Sep 25 10:59:33 CST 2019
      */
     int updateByPrimaryKey(UserMoodRecord record);
+
+
+    List<UserMoodRecord> selectByUsers(@Param("sysUsers") List<SysUser> sysUsers);
 }

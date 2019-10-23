@@ -14,4 +14,6 @@ public interface UserService {
 
     List<SysUser> findByName(String userName);
 
+    List<SysUser> selectFriendById(Integer userId);
+
 }

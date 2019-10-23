@@ -1,5 +1,5 @@
 server:
-  port: 8883
+  port: 12125
 #
 lovers:
   rootPath: /Users/wangzefeng/loverUploadFile/
