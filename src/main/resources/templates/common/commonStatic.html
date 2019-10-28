@@ -21,12 +21,12 @@
     <script src="/layui/layui.js"></script>
     <script src="/kendoUI/js/kendo.all.js"></script>
     <script src="/kendoUI/js/messages/kendo.messages.zh-CN.js"></script>
-    <script src="//at.alicdn.com/t/font_1468037_8ngaptm2j4d.js"></script>
+    <script src="//at.alicdn.com/t/font_1468037_tclw99u08xl.js"></script>
     <script src="/common/vue.min.js"></script>
     <script src="/common/commonUtils.js"></script>
     <style>
         .icon {
-            width: 1em; height: 1em;
+            width: 20px; height: 20px;
             vertical-align: -0.15em;
             fill: currentColor;
             overflow: hidden;
@@ -34,8 +34,18 @@
         li{
             list-style-type :none;
         }
+        .dropdown-menu .icon{
+            width: 14px; height: 14px;
+        }
     </style>
-    <script>
+    <script th:inline="javascript">
+
+        /*<![CDATA[*/
+
+
+        var reqData=/*[[${reqData}]]*/
+
+        /*]]>*/
 
     </script>
 </head>
@@ -62,7 +72,7 @@
                     <li><a href="/album">相册</a></li>
                     <li><a href="/space">空间</a></li>
                     <li><a href="/action">活动</a></li>
-                    <li><a href="/mood">心情记录</a></li>
+                    <li><a href="/mood/index">心情记录</a></li>
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
                         <ul class="dropdown-menu">
@@ -87,9 +97,18 @@
                     <li th:if="${#session.getAttribute('is_login')}" class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">我的 <span class="caret"></span></a>
                         <ul class="dropdown-menu">
-                            <li><a href="/message">消息中心</a></li>
-                            <li><a href="/mood/myMood">我的心情</a></li>
-                            <li><a href="/user/MyInfo">个人资料</a></li>
+                            <li><a href="/message">
+                                <svg class="icon" aria-hidden="true" ><use xlink:href="#icon-xiaoxi"></use></svg>
+                                消息中心
+                            </a></li>
+                            <li><a href="/user/center/friend">
+                                <svg class="icon" aria-hidden="true" ><use xlink:href="#icon-guanyuwomen"></use></svg>
+                                我的好友
+                            </a></li>
+                            <li><a href="/user/center/userCenter">
+                                <svg class="icon" aria-hidden="true" ><use xlink:href="#icon-wode"></use></svg>
+                                个人资料
+                            </a></li>
 
                             <li role="separator" class="divider"></li>
                             <li><a href="#">退出</a></li>

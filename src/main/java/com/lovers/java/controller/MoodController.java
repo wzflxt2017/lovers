@@ -58,30 +58,31 @@ public class MoodController extends CommonController {
     @ResponseBody
     @RequestMapping("/uploadImages")
     public Object uploadImages(List<MultipartFile> files){
-        SysUser sysUser = getSysUser();
         List<SysFile> list=new ArrayList<>();
         for(MultipartFile file:files){
-            String fileName = file.getOriginalFilename();
-            String[] split = fileName.split("\\.");
-            SysFile sysFile = new SysFile();
-            sysFile.setFileFullName(fileName);
-            sysFile.setFileSuffix("."+split[1]);
-            sysFile.setFileName(split[0]);
-            sysFile.setFileType(split[1]);
-            sysFile.setForModule("mood");
-            sysFile.setUserId(sysUser.getUserId());
-            sysFile.setUploadTime(Calendar.getInstance().getTime());
-            int insert = sysFileService.insert(sysFile);
-            try {
-                File file1 = new File(getRootPath()+"mood"+ File.separator+sysFile.getFileId()+"_"+sysFile.getFileFullName());
-                list.add(sysFile);
-                if(!file1.exists()){
-                    file1.mkdirs();
-                }
-                file.transferTo(file1);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+//            String fileName = file.getOriginalFilename();
+//            String[] split = fileName.split("\\.");
+//            SysFile sysFile = new SysFile();
+//            sysFile.setFileFullName(fileName);
+//            sysFile.setFileSuffix("."+split[1]);
+//            sysFile.setFileName(split[0]);
+//            sysFile.setFileType(split[1]);
+//            sysFile.setForModule("mood");
+//            sysFile.setUserId(sysUser.getUserId());
+//            sysFile.setUploadTime(Calendar.getInstance().getTime());
+//            int insert = sysFileService.insert(sysFile);
+//            try {
+//                File file1 = new File(getRootPath()+"mood"+ File.separator+sysFile.getFileId()+"_"+sysFile.getFileFullName());
+//                list.add(sysFile);
+//                if(!file1.exists()){
+//                    file1.mkdirs();
+//                }
+//                file.transferTo(file1);
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            }
+            SysFile mood = sysFileService.uploadImageByModule(file, "mood", getSysUser());
+            list.add(mood);
         }
         result.setSuccess(true);
         result.setData(list);
@@ -111,11 +112,11 @@ public class MoodController extends CommonController {
         return result;
     }
 
-
     @RequestMapping("/toUploadImage")
     public String toUploadImage(){
         return "java/mood/uploadImage";
     }
+
 
 
 

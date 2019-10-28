@@ -31,48 +31,55 @@
     </div>
     <div class="col-lg-10">
         <div class="container">
-            <div class="k-card" style="width:100%;text-align: center">
-                <div class="k-card-body">
-                    <p>
-                        <button type="button" class="btn btn-info" onclick="addMoodRecord()">
-                            <span class="glyphicon glyphicon-flag" aria-hidden="true"></span>
-                            开始记录
-                        </button>
-                    </p>
+            <div class="row" style="width:100%;text-align: center">
+                <div class="col-lg-12">
+                    <button type="button" class="btn btn-info" onclick="addMoodRecord()">
+                        <span class="glyphicon glyphicon-flag" aria-hidden="true"></span>
+                        开始记录
+                    </button>
                 </div>
             </div>
 
-            <div class="k-card" v-for="one in moodList" style="width: 700px;">
+            <div class="row" v-for="one in moodList" style="width: 700px;">
                 <div class="k-card-header">
-                    <h5 class="k-card-title" v-text="one.recordTitle">Rome</h5>
+                    <div>
+                        <img class="k-card-image"  style="width: 40px;height: 40px;" :src="getImageUrl(one.sysUser.userPhoto)" />
+                        <span v-text="one.sysUser.userName"></span>
+                    </div>
+                    <a href="/mood/visitorByIds">{{one.visitorNumber||0}}个人点赞</a>
+                    <h3 class="k-card-title text-center"  v-text="one.recordTitle">Rome</h3>
                     <h6 class="k-card-subtitle" v-text="one.recordContent">Capital of Italy</h6>
                 </div>
-                <img class="k-card-image" id="{{one.recordImages}}" style="width: 100%;" :src="getImageUrl(one.recordImages)" />
+                <img class="k-card-image" style="width: 700px;" :src="getImageUrl(one.recordImages)" />
                 <div class="k-card-body">
-                    <p>{{one.recordImages}}</p>
                     <p>Ancient ruins such as the Forum and the Colosseum evoke the power of the former Roman Empire. </p>
                 </div>
                 <div class="k-card-actions k-card-actions-stretched">
-                    <span class="k-card-action"><span class="k-button k-flat k-primary">Map</span></span>
-                    <span class="k-card-action"><span class="k-button k-flat k-primary">Weather</span></span>
+                    <a>
+                        <svg class="icon" aria-hidden="true" ><use xlink:href="#icon-dianzan"></use></svg>点赞
+                    </a>
+                    <a>
+                        <svg class="icon" aria-hidden="true"><use xlink:href="#icon-pingjia"></use></svg>评论
+                    </a>
+
                 </div>
             </div>
 
-            <div class="k-card row">
-                <div class="k-card-header">
-                    <h5 class="k-card-title">Rome</h5>
-                    <h6 class="k-card-subtitle">Capital of Italy</h6>
-                </div>
-                <img class="k-card-image" style="width: 100%;" src="/image/mood/test.jpeg" />
-                <div class="k-card-body">
-                    <p>Rome is a sprawling, cosmopolitan city with nearly 3,000 years of globally influential art, architecture and culture on display.</p>
-                    <p>Ancient ruins such as the Forum and the Colosseum evoke the power of the former Roman Empire. </p>
-                </div>
-                <div class="k-card-actions k-card-actions-stretched">
-                    <span class="k-card-action"><span class="k-button k-flat k-primary">Map</span></span>
-                    <span class="k-card-action"><span class="k-button k-flat k-primary">Weather</span></span>
-                </div>
-            </div>
+            <!--<div class="k-card row">-->
+                <!--<div class="k-card-header">-->
+                    <!--<h5 class="k-card-title">Rome</h5>-->
+                    <!--<h6 class="k-card-subtitle">Capital of Italy</h6>-->
+                <!--</div>-->
+                <!--<img class="k-card-image" style="width: 100%;" src="/image/mood/test.jpeg" />-->
+                <!--<div class="k-card-body">-->
+                    <!--<p>Rome is a sprawling, cosmopolitan city with nearly 3,000 years of globally influential art, architecture and culture on display.</p>-->
+                    <!--<p>Ancient ruins such as the Forum and the Colosseum evoke the power of the former Roman Empire. </p>-->
+                <!--</div>-->
+                <!--<div class="k-card-actions k-card-actions-stretched">-->
+                    <!--<span class="k-card-action"><span class="k-button k-flat k-primary">Map</span></span>-->
+                    <!--<span class="k-card-action"><span class="k-button k-flat k-primary">Weather</span></span>-->
+                <!--</div>-->
+            <!--</div>-->
 
         </div>
         <th:block th:include="/common/commonStatic :: common-footer"></th:block>
@@ -85,6 +92,18 @@
         display: flex;
         flex-wrap: wrap;
         justify-content: center;
+    }
+
+    .container .row{
+        padding: 5px;
+    }
+    .container .row>div{
+        margin: 5px;
+    }
+    .container .row::after{
+        display: block;
+        border-bottom: 1px solid #f6f6f6;
+        content: "";
     }
 
 </style>

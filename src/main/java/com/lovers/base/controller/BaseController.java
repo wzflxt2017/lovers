@@ -1,14 +1,18 @@
 package com.lovers.base.controller;
 
 import com.lovers.java.dto.common.Result;
+import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.util.HashMap;
+import java.util.Map;
 
 @Controller
+@Data
 public class BaseController {
     @Autowired
     protected HttpSession session;
@@ -19,7 +23,9 @@ public class BaseController {
     @Autowired
     protected HttpServletResponse response;
 
-    public Result result=new Result();
+    protected Result result=new Result();
+
+    protected Map<String,Object> reqData=new HashMap<>();
 
 
     public String getParam(String key){

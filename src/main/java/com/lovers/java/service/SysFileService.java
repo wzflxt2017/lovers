@@ -1,6 +1,8 @@
 package com.lovers.java.service;
 
 import com.lovers.java.domain.SysFile;
+import com.lovers.java.domain.SysUser;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -26,5 +28,5 @@ public interface SysFileService {
 
     int updateByPrimaryKey(SysFile record);
 
-
+    SysFile uploadImageByModule(MultipartFile file, String module, SysUser sysUser);
 }

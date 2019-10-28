@@ -13,7 +13,9 @@ import java.util.List;
 public interface UserService {
 
     List<SysUser> findByName(String userName);
+    SysUser findById(Integer userId);
 
     List<SysUser> selectFriendById(Integer userId);
+    void updateUser(SysUser sysUser);
 
 }

@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <!-- 创建人：wangzefeng-->
+    <!-- 创建时间：2019-10-25 14:01-->
+    <th:block th:include="/common/commonStatic :: header('首页')"></th:block>
+    <style>
+        html,body,#vue_dom,.container-fluid{
+            height: 100%;
+        }
+        body{
+            margin: 0;
+        }
+        .container-fluid{
+            padding: 0 420px 0 0;
+        }
+        .icon{
+            width: 32px;
+            height: 32px;
+        }
+
+        .container-fluid>div{
+            height: 100%;
+        }
+
+        .friend_left{
+            width: 80px;float: left;
+        }
+        .friend_left li{
+            padding-top: 50px;
+        }
+
+
+        .friend_center{
+            width: 340px;float: left;
+            border-right: 1px solid #d2d2d2;
+        }
+        .friend_center>ul{
+            width: 100%;
+            background-color: #ffffff;
+        }
+        .friend_center ul>li{
+            height: 60px;
+            line-height: 60px;
+            margin:0 10px 0 10px;
+            border-bottom:1px solid #d2d2d2;
+        }
+
+
+        .friend_right{
+            float: right;
+            width: 100%;
+            margin-right: -420px;
+        }
+
+        .activeSvg{
+            color: #8eff2e;
+        }
+
+/*
+        .layui-nav .layui-nav-item a,.layui-nav-itemed>a{
+            color: #3e3e3e!important;
+        }
+        .layui-nav .layui-nav-item>a,.layui-nav .layui-nav-itemed>a{
+            height: 25px;
+            line-height: 25px;
+            font-size: 10px;
+        }
+
+*/
+    </style>
+</head>
+<body>
+
+<div id="vue_dom">
+    <div class="container-fluid">
+        <div class="friend_left" style="">
+            <ul class="layui-nav layui-nav-tree" style="height: 100%;width: 100%">
+                <li class="layui-nav-item"><a href="/"><svg class="icon" aria-hidden="true" ><use xlink:href="#icon-shangchengshouye"></use></svg></a></li>
+                <li class="layui-nav-item"><a href=""><svg class="icon activeSvg" aria-hidden="true"  ><use xlink:href="#icon-xiaoxi1"></use></svg></a></li>
+                <li class="layui-nav-item"><a href=""><svg class="icon" aria-hidden="true" ><use xlink:href="#icon-lianxiren"></use></svg></a></li>
+            </ul>
+        </div>
+        <div class="friend_center">
+
+            <ul>
+                <li>
+                    <input type="text" style="width: 200px;display: inline;" class="form-control" placeholder="搜索">
+                    <button type="button" class="btn btn-default">添加</button>
+                </li>
+            </ul>
+            <ul>
+                <li v-for="one in sysUsers">
+                    <div style="float: left;">
+                        <img :src="getImageUrl(one.userPhoto)" style="width: 50px;height: 50px;">
+                    </div>
+                    <div style="float: left;margin-left: 10px;">
+                        <p style="height: 37px;line-height: 37px;font-weight: bold;" v-text="one.userName">姓名</p>
+                        <p style="height: 23px;line-height: 23px;font-weight: 200;" v-text="one.userBio">个性签名</p>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <div class="friend_right">
+
+        </div>
+    </div>
+
+    <script>
+
+
+
+
+    </script>
+
+</div>
+<script>
+    var vue=new Vue({
+        el:"#vue_dom",
+        data:{
+            sysUsers:reqData.sysUsers
+        },
+        methods:{
+            getImageUrl:getImageUrl
+        }
+    })
+    $(function(){
+        console.log(vue.sysUsers)
+    })
+</script>
+
+</body>
+</html>

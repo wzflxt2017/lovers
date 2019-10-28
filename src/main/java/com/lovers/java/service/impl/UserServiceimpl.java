@@ -9,6 +9,7 @@ import com.lovers.java.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Calendar;
 import java.util.List;
 
 /**
@@ -38,5 +39,16 @@ public class UserServiceimpl implements UserService {
     public List<SysUser> selectFriendById(Integer userId) {
         List<SysUser> sysUsers = sysUserMapper.selectFriendByUserId(userId);
         return sysUsers;
+    }
+
+    @Override
+    public void updateUser(SysUser sysUser) {
+        sysUser.setModifiedTime(Calendar.getInstance().getTime());
+        sysUserMapper.updateByPrimaryKeySelective(sysUser);
+    }
+
+    @Override
+    public SysUser findById(Integer userId) {
+        return sysUserMapper.selectByPrimaryKey(userId);
     }
 }
