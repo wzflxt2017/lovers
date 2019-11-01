@@ -5,6 +5,7 @@ import com.lovers.base.controller.CommonController;
 import com.lovers.java.constants.CommonConstants;
 import com.lovers.java.domain.SysUser;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
@@ -15,6 +16,10 @@ import javax.servlet.http.HttpSession;
 
 @Slf4j
 public class AuthInterceptor implements HandlerInterceptor {
+
+    @Value("${lovers.projectPath}")
+    protected String projectPath;
+
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         HttpSession session = request.getSession();
@@ -52,9 +57,6 @@ public class AuthInterceptor implements HandlerInterceptor {
             log.info("当前拦截的方法参数为：{}",request.getParameterMap().toString());
             log.info("当前拦截的方法为：{}",handlerMethod.getBean().getClass().getName());
             log.info("当前拦截的路径为：{}",request.getRequestURI());
-//            System.out.println("当前拦截的方法为："+handlerMethod.getMethod().getName());
-//            System.out.println("当前拦截的方法为："+handlerMethod.getBean().getClass().getName());
-//            System.out.println("请求地址："+request.getRequestURI());
         }
 
     }

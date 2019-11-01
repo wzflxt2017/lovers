@@ -82,9 +82,7 @@ public class SysFileServiceImpl implements SysFileService {
         int insert = insert(sysFile);
         try {
             File file1 = new File(rootPath+module+ File.separator+sysFile.getFileId()+"_"+sysFile.getFileFullName());
-            if(!file1.exists()){
-                file1.mkdirs();
-            }
+
             file.transferTo(file1);
             return sysFile;
         } catch (IOException e) {

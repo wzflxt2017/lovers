@@ -3,6 +3,7 @@ server:
 #
 lovers:
   rootPath: /Users/wangzefeng/loverUploadFile/
+  projectPath: /
 
 github:
   client:

@@ -116,6 +116,7 @@
                     </li>
 
                     <li th:unless="${#session.getAttribute('is_login')}"><a href="/login/toLogin">登录</a></li>
+                    <li th:unless="${#session.getAttribute('is_login')}"><a href="/login/toRegister">注册</a></li>
 
                     <!--<a href="https://github.com/login/oauth/authorize?client_id=dbff3cbcff6c6e268db3&redirect_uri=http://localhost:8883/callback&scope=user&state=1">登录</a>-->
                 </ul>

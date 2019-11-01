@@ -202,7 +202,7 @@ end_user_id int(10),
 end_user_name varchar(20) comment '用户昵称',
 end_time timestamp (3) null comment '任务结束时间',
 node_id int(10),
-link_id: int(10),
+link_id int(10),
 status int(2) comment '状态',
   constraint workflow_task_pk
    primary key(task_id)

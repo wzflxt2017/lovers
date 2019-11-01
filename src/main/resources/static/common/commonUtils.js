@@ -61,10 +61,7 @@ function loadImagesByIds(url,divId,imageIds,imageWidth,imageHeight,urlType,succe
             }
         });
     }
-
-
 }
-
 
 function getImageUrl(imageId){
     var imageLocalUrl="";
@@ -84,6 +81,9 @@ function getImageUrl(imageId){
         }
     });
     return imageLocalUrl;
+}
 
-
+/*前往某个页面*/
+function toPage(url) {
+    location.href=url;
 }
