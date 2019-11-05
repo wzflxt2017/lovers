@@ -1,5 +1,7 @@
 server:
   port: 12125
+  servlet:
+    context-path: /
 #
 lovers:
   rootPath: /Users/wangzefeng/loverUploadFile/

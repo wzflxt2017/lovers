@@ -86,7 +86,7 @@
             <ul>
                 <li>
                     <input type="text" style="width: 200px;display: inline;" class="form-control" placeholder="搜索">
-                    <button type="button" class="btn btn-default">添加</button>
+                    <button type="button" class="btn btn-default" onclick="">添加好友</button>
                 </li>
             </ul>
             <ul>
@@ -106,13 +106,6 @@
         </div>
     </div>
 
-    <script>
-
-
-
-
-    </script>
-
 </div>
 <script>
     var vue=new Vue({
@@ -121,7 +114,41 @@
             sysUsers:reqData.sysUsers
         },
         methods:{
-            getImageUrl:getImageUrl
+            getImageUrl:getImageUrl,
+            toAddfriend:function () {
+                layui.use('layer', function(){
+                    layer.open({
+                        type: 1,
+                        shade: 0.3,
+                        area: ['0','0'],
+                        maxmin: true,
+                        time:1,
+                        content: '动画',
+                        zIndex: 2, //重点1
+                        end: function(layero){
+                            layer.open({
+                                type: 2,
+                                shade: 0.3,
+                                area: ['800px','700px'],
+                                maxmin: true,
+                                anim: 2,
+                                content: '/user/center/toAddfriend',
+                                zIndex: 3, //重点1
+                                success: function(layero){
+                                    layer.setTop(layero); //重点2
+                                },
+                                cancel:function (index,layero) {
+                                    var body = layer.getChildFrame('body', index);
+                                    var iframeWin = window[layero.find('iframe')[0]['name']];
+                                    iframeWin.getRetData();
+
+                                }
+                            });
+                        }
+                    });
+
+                });
+            }
         }
     })
     $(function(){
