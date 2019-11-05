@@ -75,4 +75,11 @@ public class UserController extends CommonController {
         return "java/user/friend";
     }
 
+    @RequestMapping("/toAddfriend")
+    public String toAddfriend(){
+        SysUser sysUser = getSysUser();
+        reqData.put("sysUser",sysUser);
+        return "java/user/toAddfriend";
+    }
+
 }

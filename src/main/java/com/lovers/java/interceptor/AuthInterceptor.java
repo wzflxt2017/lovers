@@ -25,6 +25,14 @@ public class AuthInterceptor implements HandlerInterceptor {
         }else{
             session.setAttribute(CommonConstants.IS_LOGIN,false);
         }
+        //清理掉数据
+        if(handler instanceof HandlerMethod){
+            HandlerMethod handlerMethod = (HandlerMethod) handler;
+            Object bean = handlerMethod.getBean();
+            if(bean instanceof BaseController){
+                ((CommonController) bean).getReqData().clear();
+            }
+        }
         return true;
     }
 
@@ -46,6 +54,8 @@ public class AuthInterceptor implements HandlerInterceptor {
             HandlerMethod handlerMethod = (HandlerMethod) handler;
             Object bean = handlerMethod.getBean();
             if(bean instanceof CommonController){
+                SysUser sysUser = ((CommonController) bean).getSysUser();
+                if(sysUser!=null)
                 log.info("当前用户为：{}",((CommonController) bean).getSysUser().getUserName());
             }
             log.info("当前拦截的方法为：{}",handlerMethod.getMethod().getName());
