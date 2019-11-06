@@ -29,6 +29,15 @@ function notEmpty(data) {
     }
 }
 
+
+function notEmptyArray(data) {
+    if(data!=null&&data!=undefined&&$.trim(data)!="null"&&data.length>0){
+        return true;
+    }else{
+        return false;
+    }
+}
+
 /**
  * url:图片路径(必填);
  * divId:要加载的标签id(必填);

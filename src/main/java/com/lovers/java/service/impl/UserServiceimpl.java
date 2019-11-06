@@ -51,4 +51,14 @@ public class UserServiceimpl implements UserService {
     public SysUser findById(Integer userId) {
         return sysUserMapper.selectByPrimaryKey(userId);
     }
+
+    @Override
+    public List<SysUser> searchUsersByNameOrAccount(String userName) {
+        SysUserExample sysUserExample = new SysUserExample();
+        SysUserExample.Criteria criteria = sysUserExample.createCriteria();
+        criteria.andUserNameEqualTo(userName);
+        sysUserExample.or().andUserAccountEqualTo(userName);
+        List<SysUser> sysUsers = sysUserMapper.selectByExample(sysUserExample);
+        return sysUsers;
+    }
 }

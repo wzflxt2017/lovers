@@ -82,4 +82,12 @@ public class UserController extends CommonController {
         return "java/user/toAddfriend";
     }
 
+    @ResponseBody
+    @RequestMapping("/searchUsersByNameOrAccount")
+    public Object searchUsersByNameOrAccount(@RequestParam("userName") String userName){
+        List<SysUser> sysUsers = userService.searchUsersByNameOrAccount(userName);
+        result.setData(sysUsers);
+        return result;
+    }
+
 }

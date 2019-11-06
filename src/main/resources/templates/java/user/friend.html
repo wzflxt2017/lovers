@@ -86,7 +86,7 @@
             <ul>
                 <li>
                     <input type="text" style="width: 200px;display: inline;" class="form-control" placeholder="搜索">
-                    <button type="button" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span> </button>
+                    <button type="button" class="btn btn-primary" @click="toAddfriend()"><span class="glyphicon glyphicon-plus"></span> </button>
                 </li>
             </ul>
             <ul>
@@ -95,7 +95,7 @@
                         <img :src="getImageUrl(one.userPhoto)" style="width: 50px;height: 50px;">
                     </div>
                     <div style="float: left;margin-left: 10px;">
-                        <p style="height: 37px;line-height: 37px;font-weight: bold;" v-text="one.userName">姓名</p>
+                        <p style="height: 37px;line-height: 37px;font-weight: bold;" v-text="one.userName">昵称</p>
                         <p style="height: 23px;line-height: 23px;font-weight: 200;" v-text="one.userBio">个性签名</p>
                     </div>
                 </li>
