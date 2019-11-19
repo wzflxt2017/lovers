@@ -45,6 +45,7 @@ public class AuthInterceptor implements HandlerInterceptor {
     public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {
         if(handler instanceof HandlerMethod){
             HandlerMethod handlerMethod = (HandlerMethod) handler;
+            request.setAttribute("cxt",request.getServerName()+":"+request.getServerPort());
             Object bean = handlerMethod.getBean();
             if(bean instanceof BaseController){
                 request.setAttribute("reqData",((CommonController) bean).getReqData());

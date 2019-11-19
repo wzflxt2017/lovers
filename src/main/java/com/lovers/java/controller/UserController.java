@@ -90,4 +90,12 @@ public class UserController extends CommonController {
         return result;
     }
 
+    @ResponseBody
+    @RequestMapping("/addUser")
+    public Object addUser(@RequestParam("userName") String userName){
+        List<SysUser> sysUsers = userService.searchUsersByNameOrAccount(userName);
+        result.setData(sysUsers);
+        return result;
+    }
+
 }

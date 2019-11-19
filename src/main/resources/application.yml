@@ -6,7 +6,6 @@ server:
 lovers:
   rootPath: /Users/wangzefeng/loverUploadFile/
   projectPath: /
-
 github:
   client:
     id: dbff3cbcff6c6e268db3
@@ -18,7 +17,7 @@ github:
 spring:
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource
-    url: jdbc:mysql://localhost:3306/lovers?serverTimezone=Asia/Shanghai
+    url: jdbc:mysql://localhost:3306/lovers?serverTimezone=Asia/Shanghai&characterEncoding=UTF-8
     username: root
     password: root
     driver-class-name: com.mysql.cj.jdbc.Driver
@@ -47,4 +46,7 @@ spring:
 mybatis:
   mapper-locations: classpath:/com/lovers/java/mapper/*.xml
   type-aliases-package: com.lovers.java.domain
+logging:
+    level:
+      com.lovers.java.mapper: DEBUG
 

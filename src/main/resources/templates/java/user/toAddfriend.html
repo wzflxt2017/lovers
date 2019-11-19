@@ -5,7 +5,14 @@
     <!-- 创建时间：2019-10-29 13:51-->
     <th:block th:include="/common/commonStatic :: header('首页')"></th:block>
     <style>
-
+        .my-line{
+            width: 100%;
+            border: 1px solid #333433;
+            margin: 5px 0;
+        }
+        .vam{
+            vertical-align: middle;
+        }
     </style>
 </head>
 <body>
@@ -22,16 +29,18 @@
             </form>
         </div>
     </div>
-    <div class="row" v-if="notEmptyArray(sysUsers)">
-        <template v-for="one in sysUsers">
-            <div class="col-md-4">
-                <img  style="width: 120px;height: 120px;" alt="Bootstrap Media Preview" :src="getImageUrl(one.userPhoto)" />
-            </div>
-            <div class="col-md-8">
-                <h5  v-text="one.userName"></h5>
-                {{one.userBio}}
-            </div>
-        </template>
+    <div class="my-line"></div>
+    <div class="row" v-if="notEmptyArray(sysUsers)" v-for="one in sysUsers">
+        <div class="col-sm-4" >
+            <img  style="width: 120px;height: 120px;" alt="Bootstrap Media Preview" :src="getImageUrl(one.userPhoto)" />
+        </div>
+        <div class="col-sm-6" style="height: 120px;padding-top: 20px">
+            <h3  v-text="one.userName"></h3>
+            <p>{{one.userBio}}</p>
+        </div>
+        <div class="col-sm-2">
+            <button type="button" class="btn btn-primary" @click="addUser(one.userId)">添加</button>
+        </div>
     </div>
 </div>
 
@@ -46,6 +55,19 @@
             notEmptyArray:notEmptyArray,
             reloadVue:function(){
                 this.$forceUpdate();
+            },
+            addUser:function (userId) {
+                $.ajax({
+                    url:cxt+"/user/center/addUser",
+                    data:{
+                        userId:userId
+                    },
+                    type:"POST",
+                    dataType:"JSON",
+                    success:function(){
+
+                    }
+                })
             }
 
         }
