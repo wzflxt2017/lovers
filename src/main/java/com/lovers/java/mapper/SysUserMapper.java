@@ -28,6 +28,7 @@ public interface SysUserMapper{
     List<SysUser> selectByExample(SysUserExample example);
 
     List<SysUser> selectFriendByUserId(Integer userId);
+    List<SysUser> selectFriendByMessage(Integer userId);
 
 
     SysUser selectByPrimaryKey(Integer userId);

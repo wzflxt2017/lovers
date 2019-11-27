@@ -8,11 +8,13 @@ import com.lovers.java.service.SysFileService;
 import com.lovers.java.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -75,6 +77,21 @@ public class UserController extends CommonController {
         return "java/user/friend";
     }
 
+    @ResponseBody
+    @RequestMapping("friendOrMessageList")
+    public Object friendOrMessageList(@RequestParam("type") String type){
+        SysUser sysUser = getSysUser();
+        List<SysUser> all =null;
+        if(!StringUtils.isEmpty(type)&&type.equals("friend")){
+            all = userService.findAll(sysUser.getUserId());
+        }else{
+            all = userService.findAllByMessage(sysUser.getUserId());
+        }
+        result.setSuccess(true);
+        result.setData(all);
+        return result;
+    }
+
     @RequestMapping("/toAddfriend")
     public String toAddfriend(){
         SysUser sysUser = getSysUser();
@@ -92,9 +109,12 @@ public class UserController extends CommonController {
 
     @ResponseBody
     @RequestMapping("/addUser")
-    public Object addUser(@RequestParam("userName") String userName){
-        List<SysUser> sysUsers = userService.searchUsersByNameOrAccount(userName);
-        result.setData(sysUsers);
+    public Object addUser(@RequestParam("userId") Integer userId){
+        SysUser self = getSysUser();
+        List<Integer> list = new ArrayList<>();
+        list.add(userId);
+        userService.addFriends(self,list);
+        result.setSuccess(true);
         return result;
     }
 

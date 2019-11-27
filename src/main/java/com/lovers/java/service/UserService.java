@@ -17,6 +17,10 @@ public interface UserService {
     List<SysUser> searchUsersByNameOrAccount(String userName);
 
     List<SysUser> selectFriendById(Integer userId);
+    List<SysUser> findAll(Integer userId);
+    List<SysUser> findAllByMessage(Integer userId);
     void updateUser(SysUser sysUser);
+
+    void addFriends(SysUser self,List<Integer> friendIds);
 
 }

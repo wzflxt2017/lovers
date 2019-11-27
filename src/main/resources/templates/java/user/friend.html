@@ -77,8 +77,8 @@
         <div class="friend_left" style="">
             <ul class="layui-nav layui-nav-tree" style="height: 100%;width: 100%">
                 <li class="layui-nav-item"><a href="/"><svg class="icon" aria-hidden="true" ><use xlink:href="#icon-shangchengshouye"></use></svg></a></li>
-                <li class="layui-nav-item"><a href=""><svg class="icon activeSvg" aria-hidden="true"  ><use xlink:href="#icon-xiaoxi1"></use></svg></a></li>
-                <li class="layui-nav-item"><a href=""><svg class="icon" aria-hidden="true" ><use xlink:href="#icon-lianxiren"></use></svg></a></li>
+                <li class="layui-nav-item" onclick="changeItem(this,'message')"><a ><svg class="icon" aria-hidden="true"  ><use xlink:href="#icon-xiaoxi1"></use></svg></a></li>
+                <li class="layui-nav-item" onclick="changeItem(this,'friend')"><a ><svg class="icon activeSvg" aria-hidden="true" ><use xlink:href="#icon-nicheng"></use></svg></a></li>
             </ul>
         </div>
         <div class="friend_center">
@@ -89,7 +89,18 @@
                     <button type="button" class="btn btn-primary" @click="toAddfriend()"><span class="glyphicon glyphicon-plus"></span> </button>
                 </li>
             </ul>
-            <ul>
+            <ul class="message" style="display: none;">
+                <li v-for="one in sysUsers">
+                    <div style="float: left;">
+                        <img :src="getImageUrl(one.userPhoto)" style="width: 50px;height: 50px;">
+                    </div>
+                    <div style="float: left;margin-left: 10px;">
+                        <p style="height: 37px;line-height: 37px;font-weight: bold;" v-text="one.userName">昵称</p>
+                        <p style="height: 23px;line-height: 23px;font-weight: 200;" v-text="one.userBio">个性签名</p>
+                    </div>
+                </li>
+            </ul>
+            <ul class="friend">
                 <li v-for="one in sysUsers">
                     <div style="float: left;">
                         <img :src="getImageUrl(one.userPhoto)" style="width: 50px;height: 50px;">
@@ -150,10 +161,32 @@
                 });
             }
         }
-    })
-    $(function(){
-        console.log(vue.sysUsers)
-    })
+    });
+
+    function changeItem(self,item){
+        $(self).siblings().find("svg").removeClass("activeSvg");
+        $(self).find(".icon").addClass("activeSvg");
+        if(item=="message"){
+            $(".message").show();
+            $(".friend").hide();
+        }else{
+            $(".message").hide();
+            $(".friend").show();
+        }
+        $.ajax({
+            url:"/user/center/friendOrMessageList",
+            type:"GET",
+            data:{
+                type:item
+            },
+            dataType:"JSON",
+            success:function(data){
+                if(data.success){
+                    vue.$data.sysUsers=data.data;
+                }
+            }
+        })
+    }
 </script>
 
 </body>

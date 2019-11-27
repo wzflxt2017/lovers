@@ -39,7 +39,7 @@
             <p>{{one.userBio}}</p>
         </div>
         <div class="col-sm-2">
-            <button type="button" class="btn btn-primary" @click="addUser(one.userId)">添加</button>
+            <button type="button" class="btn btn-primary" :userId="one.userId" onclick="addUser(this)">添加</button>
         </div>
     </div>
 </div>
@@ -55,23 +55,26 @@
             notEmptyArray:notEmptyArray,
             reloadVue:function(){
                 this.$forceUpdate();
-            },
-            addUser:function (userId) {
-                $.ajax({
-                    url:cxt+"/user/center/addUser",
-                    data:{
-                        userId:userId
-                    },
-                    type:"POST",
-                    dataType:"JSON",
-                    success:function(){
-
-                    }
-                })
             }
 
         }
-    })
+    });
+    var addUser=function (self) {
+        var userId = $(self).attr("userId");
+        $.ajax({
+            url:"/user/center/addUser",
+            type:"GET",
+            data:{
+                userId:parseInt(userId)
+            },
+            dataType:"JSON",
+            success:function(data){
+                if(data.success){
+                    closeSelf();
+                }
+            }
+        });
+    }
     var searchUser=function () {
         var userName = $("#userName").val();
         $.ajax({

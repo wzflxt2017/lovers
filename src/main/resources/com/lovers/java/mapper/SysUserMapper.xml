@@ -131,6 +131,14 @@
     where s.user_id in(select f.friend_id from user_friend f where f.user_id=${userId,jdbcType=INTEGER}) or s.user_id=${userId,jdbcType=INTEGER}
   </select>
 
+  <select id="selectFriendByMessage" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+      distinct
+    <include refid="Base_Column_List" />
+    from sys_user s left join user_message m on s.user_id=m.sender_id or s.user_id=m.receiver_id
+    where m.sender_id =${userId,jdbcType=INTEGER} or m.receiver_id =${userId,jdbcType=INTEGER}
+  </select>
+
 
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     <!--
