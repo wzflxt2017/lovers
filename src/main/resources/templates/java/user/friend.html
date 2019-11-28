@@ -14,10 +14,10 @@
         .container-fluid{
             padding: 0 420px 0 0;
         }
-        .icon{
-            width: 32px;
-            height: 32px;
-        }
+        /*.icon{*/
+            /*width: 32px;*/
+            /*height: 32px;*/
+        /*}*/
 
         .container-fluid>div{
             height: 100%;
@@ -37,12 +37,12 @@
         }
         .friend_center>ul{
             width: 100%;
-            background-color: #ffffff;
+            background-color: #f5f3f1;
         }
         .friend_center ul>li{
             height: 60px;
             line-height: 60px;
-            margin:0 10px 0 10px;
+            padding:0 10px 0 10px;
             border-bottom:1px solid #d2d2d2;
         }
 
@@ -55,6 +55,21 @@
 
         .activeSvg{
             color: #8eff2e;
+        }
+        .activeUser{
+            background-color: #c5c4c4!important;
+        }
+        .message .message_header{
+            height: 40px;
+        }
+        .message .message_record{
+
+        }
+        .message .message_tool{
+
+        }
+        .message .message_content{
+
         }
 
         /*
@@ -81,7 +96,7 @@
                 <li class="layui-nav-item" onclick="changeItem(this,'friend')"><a ><svg class="icon activeSvg" aria-hidden="true" ><use xlink:href="#icon-nicheng"></use></svg></a></li>
             </ul>
         </div>
-        <div class="friend_center">
+        <div class="friend_center" style="background-color: #f5f3f1">
 
             <ul>
                 <li>
@@ -90,7 +105,7 @@
                 </li>
             </ul>
             <ul class="message" style="display: none;">
-                <li v-for="one in sysUsers">
+                <li v-for="one in sysUsers" class="user_item">
                     <div style="float: left;">
                         <img :src="getImageUrl(one.userPhoto)" style="width: 50px;height: 50px;">
                     </div>
@@ -101,7 +116,7 @@
                 </li>
             </ul>
             <ul class="friend">
-                <li v-for="one in sysUsers">
+                <li v-for="(one,index) in sysUsers" class="user_item" :userIndex="index">
                     <div style="float: left;">
                         <img :src="getImageUrl(one.userPhoto)" style="width: 50px;height: 50px;">
                     </div>
@@ -113,7 +128,71 @@
             </ul>
         </div>
         <div class="friend_right">
+            <div class="friend" style="width: 500px;margin: 50px;">
+                <template v-if="sysUser!=null&&sysUser!=''">
+                    <div>
+                        <div style="padding:0 0 50px 0;border-bottom: 1px solid #626262;">
+                            <h2>
+                                <img :src="getImageUrl(sysUser.userPhoto)" style="width: 100px;height: 100px;">
+                                <span v-text="sysUser.userName"></span>
+                                <svg v-if="sysUser.userGender==1" class="icon" style="color: #00B0FF" aria-hidden="true" >
+                                    <use xlink:href="#icon-nan"></use>
+                                </svg>
+                                <svg v-else-if="sysUser.userGender==2" class="icon" style="color: #b499b0" aria-hidden="true" >
+                                    <use xlink:href="#icon-nv"></use>
+                                </svg>
+                            </h2>
+                            <p v-text="sysUser.userBio"></p>
+                        </div>
+                        <div>
 
+                            <table class="layui-table" lay-skin="nob">
+                                <colgroup>
+                                    <col width="50">
+                                    <col width="200">
+                                </colgroup>
+                                <tbody>
+                                <tr>
+                                    <td>姓名</td>
+                                    <td v-text="sysUser.fullName">姓名</td>
+                                </tr>
+                                <tr>
+                                    <td>账号</td>
+                                    <td v-text="sysUser.userAccount">账号</td>
+                                </tr>
+                                <tr>
+                                    <td>地址</td>
+                                    <td v-text="sysUser.userAddress"></td>
+                                </tr>
+                                <tr>
+                                    <td>Email</td>
+                                    <td v-text="sysUser.userEmail"></td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="text-center">
+                            <p>
+                                <a class="layui-btn layui-btn-normal" href="#" role="button">发送消息</a>
+                            </p>
+                        </div>
+                    </div>
+                </template>
+            </div>
+            <div class="message">
+                <div class="message_header">
+
+                </div>
+                <div class="message_record">
+
+                </div>
+                <div class="message_tool">
+
+                </div>
+                <div class="message_content">
+
+                </div>
+            </div>
         </div>
     </div>
 
@@ -122,7 +201,8 @@
     var vue=new Vue({
         el:"#vue_dom",
         data:{
-            sysUsers:reqData.sysUsers
+            sysUsers:"",
+            sysUser:""
         },
         methods:{
             getImageUrl:getImageUrl,
@@ -160,8 +240,36 @@
 
                 });
             }
+        },
+        watch:{
+            sysUsers:function(val, oldVal){
+                // DOM 还没有更新
+                this.$nextTick(function () {
+                    // DOM 现在更新了
+                    // `this` 绑定到当前实例
+                    $(".friend_center .user_item").mouseover(function(){
+                        $(this).css({"background-color":"#c5c4c4"})
+                    });
+                    $(".friend_center .user_item").mouseout(function(){
+                        $(this).css({"background-color":"#f5f3f1"})
+                    });
+
+                    $(".friend_center .user_item").click(function(){
+                        // $(this).css({"background-color":"#c5c4c4"});
+                        // $(this).siblings().css({"background-color":"#f5f3f1"});
+                        $(this).siblings().removeClass("activeUser");
+                        $(this).addClass("activeUser");
+                        var userIndex=$(this).attr("userIndex")
+                        vue.$data.sysUser=vue.$data.sysUsers[parseInt(userIndex)];
+                    });
+                })
+            }
         }
     });
+
+    $(function(){
+        $(".friend_left li:eq(2)").click();
+    })
 
     function changeItem(self,item){
         $(self).siblings().find("svg").removeClass("activeSvg");
