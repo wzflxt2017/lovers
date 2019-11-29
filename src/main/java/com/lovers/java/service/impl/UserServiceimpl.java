@@ -1,11 +1,9 @@
 package com.lovers.java.service.impl;
 
-import com.lovers.java.domain.SysUser;
-import com.lovers.java.domain.SysUserExample;
-import com.lovers.java.domain.UserFriend;
-import com.lovers.java.domain.UserFriendExample;
+import com.lovers.java.domain.*;
 import com.lovers.java.mapper.SysUserMapper;
 import com.lovers.java.mapper.UserFriendMapper;
+import com.lovers.java.mapper.UserMessageMapper;
 import com.lovers.java.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -27,6 +25,9 @@ public class UserServiceimpl implements UserService {
 
     @Autowired
     private UserFriendMapper userFriendMapper;
+
+    @Autowired
+    private UserMessageMapper userMessageMapper;
 
     @Override
     public List<SysUser> findByName(String userName) {
@@ -88,5 +89,27 @@ public class UserServiceimpl implements UserService {
     @Override
     public List<SysUser> findAllByMessage(Integer userId) {
         return sysUserMapper.selectFriendByMessage(userId);
+    }
+
+    @Override
+    public void messageByUserId(Integer sender, Integer receiver) {
+
+    }
+
+    @Override
+    public void saveMessage(UserMessage message) {
+        userMessageMapper.insert(message);
+    }
+
+    @Override
+    public List<SysUser> findAllMessageUsersByUserId(Integer userId) {
+        List<SysUser> users = sysUserMapper.findAllMessageUsersByUserId(userId);
+        return users;
+    }
+
+    @Override
+    public List<UserMessage> findMessageByUserId(Integer sender, Integer receiver) {
+        List<UserMessage> messages = userMessageMapper.findMessageByUserId(sender, receiver);
+        return messages;
     }
 }

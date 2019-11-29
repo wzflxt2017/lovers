@@ -2,6 +2,7 @@ package com.lovers.java.service;
 
 
 import com.lovers.java.domain.SysUser;
+import com.lovers.java.domain.UserMessage;
 
 import java.util.List;
 
@@ -22,5 +23,11 @@ public interface UserService {
     void updateUser(SysUser sysUser);
 
     void addFriends(SysUser self,List<Integer> friendIds);
+    void messageByUserId(Integer sender,Integer receiver);
+    void saveMessage(UserMessage message);
+    List<UserMessage> findMessageByUserId(Integer sender,Integer receiver);
+
+    List<SysUser> findAllMessageUsersByUserId(Integer userId);
+
 
 }

@@ -29,6 +29,7 @@ public interface SysUserMapper{
 
     List<SysUser> selectFriendByUserId(Integer userId);
     List<SysUser> selectFriendByMessage(Integer userId);
+    List<SysUser> findAllMessageUsersByUserId(@Param("userId")Integer userId);
 
 
     SysUser selectByPrimaryKey(Integer userId);

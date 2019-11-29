@@ -4,8 +4,10 @@ import com.lovers.base.controller.CommonController;
 import com.lovers.java.constants.CommonConstants;
 import com.lovers.java.domain.SysFile;
 import com.lovers.java.domain.SysUser;
+import com.lovers.java.domain.UserMessage;
 import com.lovers.java.service.SysFileService;
 import com.lovers.java.service.UserService;
+import com.lovers.utils.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
@@ -15,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 /**
@@ -85,7 +88,7 @@ public class UserController extends CommonController {
         if(!StringUtils.isEmpty(type)&&type.equals("friend")){
             all = userService.findAll(sysUser.getUserId());
         }else{
-            all = userService.findAllByMessage(sysUser.getUserId());
+            all = userService.findAllMessageUsersByUserId(sysUser.getUserId());
         }
         result.setSuccess(true);
         result.setData(all);
@@ -114,6 +117,43 @@ public class UserController extends CommonController {
         List<Integer> list = new ArrayList<>();
         list.add(userId);
         userService.addFriends(self,list);
+        result.setSuccess(true);
+        return result;
+    }
+
+    @ResponseBody
+    @RequestMapping("/messageByUserId")
+    public Object messageByUserId(@RequestParam("userId") Integer userId){
+        SysUser self = getSysUser();
+        UserMessage message=new UserMessage();
+        message.setIsRead(10);
+        message.setSenderId(self.getUserId());
+        message.setReceiverId(userId);
+        message.setMessageType("1");
+        message.setMessageContent("");
+        message.setMessageTime(DateUtils.getWebDate());
+        userService.saveMessage(message);
+        SysUser messageUser = userService.findById(userId);
+
+        result.setData(messageUser);
+        result.setSuccess(true);
+        return result;
+    }
+    @ResponseBody
+    @RequestMapping("/findAllMessageByUserId")
+    public Object findAllMessageByUserId(){
+        SysUser self = getSysUser();
+        List<SysUser> users = userService.findAllMessageUsersByUserId(self.getUserId());
+        result.setData(users);
+        result.setSuccess(true);
+        return result;
+    }
+    @ResponseBody
+    @RequestMapping("/findMessageByUserId")
+    public Object findMessageByUserId(@RequestParam("userId") Integer userId){
+        SysUser self = getSysUser();
+        List<UserMessage> messages = userService.findMessageByUserId(self.getUserId(),userId);
+        result.setData(messages);
         result.setSuccess(true);
         return result;
     }

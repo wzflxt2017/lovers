@@ -139,6 +139,14 @@
     where m.sender_id =${userId,jdbcType=INTEGER} or m.receiver_id =${userId,jdbcType=INTEGER}
   </select>
 
+  <select id="findAllMessageUsersByUserId"  resultMap="BaseResultMap">
+    select
+      distinct
+    <include refid="Base_Column_List" />
+    from sys_user s left join user_message m on s.user_id=m.sender_id or s.user_id=m.receiver_id
+    where ((m.sender_id =#{userId,jdbcType=INTEGER} and m.is_read!=3 )or (m.receiver_id =#{userId,jdbcType=INTEGER} and m.is_read!=4 )) and s.user_id!=#{userId,jdbcType=INTEGER}
+  </select>
+
 
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     <!--
