@@ -1,46 +1,17 @@
 package com.lovers.java.mapper;
 
 import com.lovers.java.domain.SysUser;
-import com.lovers.java.domain.SysUserExample;
 import org.apache.ibatis.annotations.Param;
+import tk.mybatis.mapper.common.Mapper;
 
 import java.util.List;
 
-public interface SysUserMapper{
+public interface SysUserMapper extends Mapper<SysUser> {
 
-
-
-
-    SysUser selectByAccount(String userAccount);
-
-
-    long countByExample(SysUserExample example);
-
-    int deleteByExample(SysUserExample example);
-
-    int deleteByPrimaryKey(Integer userId);
-
-
-    int insert(SysUser record);
-
-    int insertSelective(SysUser record);
-
-    List<SysUser> selectByExample(SysUserExample example);
-
-    List<SysUser> selectFriendByUserId(Integer userId);
-    List<SysUser> selectFriendByMessage(Integer userId);
+    SysUser selectByAccount(@Param("userAccount")String userAccount);
+    List<SysUser> selectFriendByUserId(@Param("userId")Integer userId);
+    List<SysUser> selectFriendByMessage(@Param("userId")Integer userId);
     List<SysUser> findAllMessageUsersByUserId(@Param("userId")Integer userId);
 
 
-    SysUser selectByPrimaryKey(Integer userId);
-
-    int updateByExampleSelective(@Param("record") SysUser record, @Param("example") SysUserExample example);
-
-
-    int updateByExample(@Param("record") SysUser record, @Param("example") SysUserExample example);
-
-    int updateByPrimaryKeySelective(SysUser record);
-
-
-    int updateByPrimaryKey(SysUser record);
 }
